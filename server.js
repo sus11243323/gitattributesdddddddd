@@ -5,15 +5,15 @@ app.use(express.json());
 
 let serverOn = true;
 
-// middleware MUST come before static + routes
+// HARD GATE: runs BEFORE EVERYTHING
 app.use((req, res, next) => {
-  if (!serverOn && req.path !== "/admin/cmd") {
+  if (!serverOn) {
     return res.status(503).send("Service Unavailable");
   }
   next();
 });
 
-// admin control
+// admin control (still accessible even when off)
 app.post("/admin/cmd", (req, res) => {
   if (req.body.cmd === "/shutdown") serverOn = false;
   if (req.body.cmd === "/boot") serverOn = true;
@@ -21,10 +21,9 @@ app.post("/admin/cmd", (req, res) => {
   res.json({ serverOn });
 });
 
-// static AFTER middleware
+// ONLY serve static if serverOn is true (after middleware already checked it)
 app.use(express.static("public"));
 
-// main route
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
 });
