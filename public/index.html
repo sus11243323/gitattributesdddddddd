@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CYBER ZONE 1995</title>
+
+<style>
+body {
+  margin: 0;
+  background: black;
+  color: lime;
+  font-family: "Comic Sans MS", monospace;
+}
+
+header {
+  background: navy;
+  padding: 10px;
+  text-align: center;
+  font-size: 28px;
+  color: yellow;
+  border-bottom: 4px ridge gray;
+}
+
+.container {
+  padding: 15px;
+}
+
+.box {
+  border: 3px solid red;
+  padding: 10px;
+  margin: 10px 0;
+  background: #000022;
+}
+
+button {
+  padding: 10px;
+  margin: 5px;
+  border: 3px outset white;
+  background: silver;
+  cursor: pointer;
+}
+
+input {
+  padding: 8px;
+  width: 200px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+CYBER ZONE 1995 TERMINAL
+</header>
+
+<div class="container">
+
+  <div class="box">
+    STATUS: <span id="status">LOADING...</span>
+  </div>
+
+  <div class="box">
+    <button onclick="cmd('/shutdown')">SHUTDOWN SERVER</button>
+    <button onclick="cmd('/boot')">BOOT SERVER</button>
+    <button onclick="cmd('/wipe')">WIPE SERVER</button>
+  </div>
+
+  <div class="box">
+    <h3>CHATROOM</h3>
+    <div id="chat"></div><br>
+    <input id="msg" placeholder="message">
+    <button onclick="sendMsg()">SEND</button>
+  </div>
+
+</div>
+
+<script src="/app.js"></script>
+
+</body>
+</html>
